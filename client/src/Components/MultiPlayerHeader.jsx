@@ -79,6 +79,7 @@ const JoinRoomContainer = (props) => {
           }}
           value={joiningLink}
         />
+        
         <button
           disabled={!joiningLink}
           style={{ cursor: joiningLink ? "pointer" : "not-allowed" }}
@@ -91,10 +92,12 @@ const JoinRoomContainer = (props) => {
         >
           Join Room
         </button>
+   
       </div>
     </div>
   );
 };
+
 
 const MultiPlayerHeader = () => {
   const [createRoom, setCreateRoom] = useState(false);
@@ -129,6 +132,15 @@ const MultiPlayerHeader = () => {
               onClick={() => setJoinRoom(true)}
             >
               Join
+            </div>
+            <div>
+            <select name="cars" id="cars">
+    <option value="Difficulty">Difficulty</option>
+    <option value="Easy">Easy</option>
+    <option value="Medium">Medium</option>
+    <option value="Hard">Hard</option>
+  </select>
+              
             </div>
           </div>
         </div>
