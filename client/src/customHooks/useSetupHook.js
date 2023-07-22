@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 // const socket = new io("https://fastf.onrender.com");
 // for local testing
 const socket = new io("http://localhost:5000");
-
+//Setting up various events using useEffect
 const useSocketHook = () => {
   useEffect(() => {
     socket.connect();

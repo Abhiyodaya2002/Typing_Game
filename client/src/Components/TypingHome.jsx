@@ -5,6 +5,7 @@ import React from "react";
 const TypingHome = () => {
   return (
     <>
+    {/* Created a navbar and divided it into two parts left and right */}
       <div className="home-navbar-container">
         <div className="home-navbar-left-container">
           <a href="/" style={{fontSize: "1.8rem"}}>Typing Dash Pro</a>

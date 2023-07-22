@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
+// Setting Redux for state management
 import playersSlice from "./fetures/playersSlice";
 
 const rootReducer = combineReducers({

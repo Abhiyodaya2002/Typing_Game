@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 
-// import cors from "cors";
+
 
 export default (httpServer) => {
   const io = new Server(httpServer, {
@@ -9,6 +9,6 @@ export default (httpServer) => {
     },
   });
 
-  //   const io = new Server(httpServer);
+ 
   return io;
 };

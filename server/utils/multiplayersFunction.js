@@ -27,15 +27,4 @@ export const playerProfileArray = [
   "https://i.pinimg.com/564x/22/d5/b7/22d5b72cd6405a5ae2edc4feacdd08cd.jpg",
   "https://i.pinimg.com/736x/26/e4/5a/26e45ac8d7e40ed25811f4d0cd130765.jpg",
 ];
-// export const assignProfile = function assignProfile(prevObject, ProfileArray) {
-//   const object = { ...prevObject };
-//   for (const value of PlayersArray) {
-//     const asingnedProfile = Object.values(object);
-//     for (const image of ProfileArray) {
-//       if (!asingnedProfile.includes(image)) {
-//         object[value] = image;
-//       }
-//     }
-//     return object;
-//   }
-// };
+

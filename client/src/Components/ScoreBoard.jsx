@@ -14,7 +14,7 @@ export default function ScoreBoard() {
   const assignProfile = useSelector(
     (state) => state.rootReducer.playersInfo.assignProfile
   );
-
+// Return the winner of the game 
   return (
     <div
       className="scoreboard-backgroud-div"

@@ -98,7 +98,7 @@ const JoinRoomContainer = (props) => {
   );
 };
 
-
+// Creating Multiplayer function
 const MultiPlayerHeader = () => {
   const [createRoom, setCreateRoom] = useState(false);
   const [joinRoom, setJoinRoom] = useState(false);

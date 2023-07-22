@@ -16,12 +16,7 @@ for (const value of ArrayOfProfile) {
   object[value] = "";
 }
 
-// for (const val in object) {
-//   if (!object[val]) {
-//     console.log("condition satisfiedS");
-//     break;
-//   }
-// }
+
 
 function checkifexist(player) {
   const addedUsers = Object.keys(object);

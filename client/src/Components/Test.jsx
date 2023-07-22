@@ -16,7 +16,7 @@ import ScoreBoard from "./ScoreBoard";
 import { TestConsole } from "../utils/multiplayerFunctions";
 import { socket } from "../customHooks/useSetupHook.js";
 import { useParams } from "react-router-dom";
-
+// Imported all the necessay file and functions
 const Test = () => {
   const [currWordIndex, setCurrWordIndex] = useState(0);
   const [currWordStatus, setCurrWordStatus] = useState(false);
@@ -47,18 +47,22 @@ const Test = () => {
 
   const { id } = useParams();
   const players = useSelector((state) => state.rootReducer.playersInfo.players);
+  // Start Button function
   const startbutton = useSelector(
     (state) => state.rootReducer.playersInfo.isStart
   );
+
+  // ShowScoreboard function
   const showScoreBoard = useSelector(
     (state) => state.rootReducer.playersInfo.showScoreBoard
   );
+  //ConvertToSocketID function
 
   function convertToSocketId(str) {
-    const result = str.replace(new RegExp("room", "g"), ""); // remove all occurrences of the target string
+    const result = str.replace(new RegExp("room", "g"), ""); // All occurrences of the target string is removed
     return result;
   }
-  //start time on start button event
+  //start time on as soon as start button event is fired
   socket.on("startTime", () => {
     dispatch(setStart({ start: true }));
     if (!intervalRef.current) {
@@ -68,6 +72,7 @@ const Test = () => {
       inputRef.current.focus();
     }
   });
+  // Restart Game event 
   socket.on("restart_game", () => {
     stopTimer();
     setRefresh(true);
@@ -92,8 +97,8 @@ const Test = () => {
     setCurrWordIndex(0);
     setCurrWordStatus(false);
   });
-  // ==================
-
+  
+//Startt Timeer event 
   function startTimer(event) {
     const isOwner = convertToSocketId(id) == socket.id;
     const isStart = players.length == 1 || startbutton;
@@ -106,14 +111,14 @@ const Test = () => {
       }
     }
   }
-
+// Stop timer function
   function stopTimer() {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
     setTimElapsed(0);
     dispatch(setStop());
   }
-
+// Word list stat
   const [wordListStat, setWordListStat] = useState(() => {
     const initialWordListStat = {};
     wordListArray.forEach((value, idx) => {
@@ -121,7 +126,7 @@ const Test = () => {
     });
     return initialWordListStat;
   });
-
+// Handle Update State
   const handleUpdate = (word) => {
     // Update the "test" property of the object for the specified word to true
     setWordListStat((prevWordListStat) => ({
@@ -141,13 +146,13 @@ const Test = () => {
       },
     }));
   };
-
+//stop Refresh function
   function stopRefresh() {
     setTimeout(() => {
       setRefresh(false);
     }, 1000);
   }
-  //
+  // Start Referesh function
 
   function startRefresh() {
     const isOwner = convertToSocketId(id) == socket.id;
@@ -157,6 +162,7 @@ const Test = () => {
       }
     }
   }
+  // HandleUpdate function
 
   const handleUpdateNew = (value) => {
     setWordnew((wordsNew) => {
@@ -165,7 +171,7 @@ const Test = () => {
       return words;
     });
   };
-
+// Handle backspace function
   const handleBackspace = (value) => {
     setWordnew((wordsNew) => {
       let words = wordsNew;
@@ -176,7 +182,7 @@ const Test = () => {
       return words;
     });
   };
-
+//Handle jey stroks fuction
   const handleKeyStrokes = () => {
     setWordnew((wordsNew) => {
       let words = wordsNew;
@@ -242,21 +248,22 @@ const Test = () => {
       wrong: wrongWords.length,
     };
   }
-
+// Get words per minute
   function getWPM() {
     let count = wordnew.filter((elm, idx) => elm.word == elm.typed).length;
     console.log("count", count);
     console.log("timeElapsed", timeElapsed);
-    const wpm = (count / (timeElapsed || 1)) * 60;
+    const wpm = (count / (timeElapsed || 1)) * 60;  // Formulae used
     return Math.ceil(wpm);
   }
+  // setting REsult states function
   function setResultStates(accuracy, correctWords, incorrectWords, fwpm) {
     setAccuracy(accuracy);
     setCorrectWords(correctWords);
     setIncorrectWords(incorrectWords);
     setWpm(fwpm);
   }
-
+// On room result event 
   socket.on("onRoomResult", (data) => {
     console.log("room result", data);
     dispatch(setRank({ roomObj: data }));
@@ -340,6 +347,7 @@ const Test = () => {
 
   return (
     <>
+    {/* implement the main part of code */}
       {showScoreBoard && <ScoreBoard />}
       <div className="home-Page-content">
         <div className="typing-test-container">
@@ -353,6 +361,7 @@ const Test = () => {
                       ? "red"
                       : wordListStat[idx].color,
                 }}
+                
                 className={`default ${elm.typed == elm.word && "green"} ${
                   elm.typed !== elm.word && !!elm.typed && "red"
                 } ${currWordIndex == idx && currWordStatus && "red-cur"}`}
@@ -402,8 +411,6 @@ const Test = () => {
               </div>
             )}
           </div>
-          {/* for singal player css */}
-          {/* typing-test-result-container-singal-player */}
           <div className="typing-test-result-container">
             <div className="typing-test-inner-left-container">
               <PlayersInfoContainer />

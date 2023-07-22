@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+//PlayerSlice
 const playersSlice = createSlice({
   name: "playersSlice",
   initialState: {
@@ -10,7 +10,7 @@ const playersSlice = createSlice({
     scoreRank: [],
     assignProfile: {},
   },
-
+//Reducers
   reducers: {
     addPlayers: (state, { payload }) => {
       state.players = payload.players;

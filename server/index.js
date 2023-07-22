@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 const server = createServer(app);
-// connectin to the socket server
+
 const io = socketConnection(server);
 let activeSockets = [];
 const playersResult = {};
@@ -32,15 +32,13 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log(io.sockets.adapter.rooms);
   });
-  // socket.on("StartGame", (room) => {
-  //   io.to(room).emit("start", { start: true });
-  // });
+  
   socket.on("create", (room) => {
     socket.join(room);
     console.log(io.sockets.adapter.rooms, [
       ...io.sockets.adapter.rooms.get(room),
     ]);
-    // io.to(room)
+   
 
     io.to(room).emit("room_members", {
       members: [...io.sockets.adapter.rooms.get(room)],
@@ -54,11 +52,11 @@ io.on("connection", (socket) => {
     io.to(room).emit("startTime", { msg: "start game" });
   });
 
-  // =======================================to be completed
+  
   socket.on("roomResult", (data) => {
     io.to(data.room).emit("showResult", data);
   });
-  // =======================================
+
   socket.on("onData", (room) => {
     io.to(room).emit("restart_game", room);
   });
@@ -66,7 +64,7 @@ io.on("connection", (socket) => {
   socket.on("resultPop", (data) => {
     try {
       let roomId = data?.roomId;
-      let userId = data?.id; // Move userId declaration outside of if statements
+      let userId = data?.id; 
       if (!resultPop[roomId]) {
         resultPop[roomId] = {};
       }
@@ -99,9 +97,6 @@ io.on("connection", (socket) => {
   socket.on("keydown", (data) => {
     console.log(socket.id, data);
     io.to(data.room).emit("room_update", { ...data, id: socket.id });
-    // socket.broadcast
-    //   .to(data.room)
-    //   .emit("room_update", { ...data, id: socket.id });
   });
 });
 

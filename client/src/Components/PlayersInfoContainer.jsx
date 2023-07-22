@@ -14,14 +14,12 @@ import { socket } from "../customHooks/useSetupHook";
 import { useParams } from "react-router-dom";
 import useSocketroom from "../customHooks/useSocketroom";
 
-// import Profile from "../Assets/Profile.jpg";
 
-// import Profile from "../Assets/images/Vector (1).svg";
 
 const PlayersInfoContainer = () => {
   const { id } = useParams();
   const [players, setPlayers] = useState([]);
-  // const [assignProfile, setAssignedProfile] = useState({});
+
   const assignProfile = useSelector(
     (state) => state.rootReducer.playersInfo.assignProfile
   );
@@ -35,7 +33,7 @@ const PlayersInfoContainer = () => {
     setPlayers(data.members);
     dispatch(addPlayers({ players: data?.members }));
     dispatch(setAssignedProfile({ data: data.assignedProfiles }));
-    // const object = assignProfile(profileArray, players);
+    
   });
 
   function convertToSocketId(str) {
@@ -85,19 +83,7 @@ const PlayersInfoContainer = () => {
           </div>
         ))}
       </div>
-      {/* 
-        <div className="players-profile-base-container">
-          {convertToSocketId(id) == socket.id && (
-            <button onClick={() => startGame(id)} id="start-button">
-              Start
-            </button>
-          )}
-          {players.map(() => (
-            <div className="players-profile-card">
-              <p className="inner-profile-container"></p>
-            </div>
-          ))}
-        </div> */}
+      
     </>
   );
 };

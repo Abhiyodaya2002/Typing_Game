@@ -1,6 +1,6 @@
 import React from "react";
 import { socket } from "./useSetupHook";
-
+// Setting up various events inside create room window
 const useSocketroom = {
     createRoom: (room) => {
         socket.emit("create", room);
